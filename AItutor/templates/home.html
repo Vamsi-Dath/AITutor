@@ -1,0 +1,50 @@
+{% extends 'master.html' %}
+
+{% block title %}
+    ConvAI - Project
+{% endblock %}
+
+{% block content %}
+    <div class='container mt-3'>
+        <ul class='nav nav-tabs'>
+            <li><h3>AI TUTOR</h3><h6>by vamsi</h6></li>
+            <li class='nav-item'>
+                <a href='/' class='nav-link active'>Home</a>
+            </li>
+            <li class=''>
+                <a style="color:black;"href='/learn/A' class='nav-link'>Start Learning</a>
+            </li>
+            <li class=''>
+                <a style="color:black;"href='/about' class='nav-link'>About</a>
+            </li>
+        </ul>
+    </div>
+    
+<div class='container rounded p-5 my-5 bg-success text-black text-center'>
+        <h1>Convai Full Stack Developer - Internship Project challenge</h1>
+    
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div style="margin-left: auto;margin-right: auto;"class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Vamsi Dath</h5>
+              <p class="card-text">Computer Science &Engg. (20CS8129)
+                <a href="mailto:vamsiduth.meka@gmail.com">Email</a></p>
+              <h6 class="card-title">National Institute of Technology Durgapur</h6><h6> B.Tech(2020-2024)</h6>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div  id ="redirect" >
+<button onclick="window.location.href = '/learn/A';" type="button" class="btn btn-primary"data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 500px;height: 100px; border-radius:50px;border-color: white;">
+  <h3>Start Learning</h3>
+</button>
+</div>
+              
+<div style="padding-top: 200px;
+bottom: 0;">
+<h4><marquee ><span style="color:red;">Note:</span> OpenAI API is used along with HTML, CSS, JS, Bootstrap and Django</h4>
+<h6><a href="mailto:vamsiduth.meka@gmail.com">>> write a mail in case of any queries here</a></marquee></h6>
+</div>
+{% endblock %}

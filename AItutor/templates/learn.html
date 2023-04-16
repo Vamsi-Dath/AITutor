@@ -1,0 +1,195 @@
+{% extends 'master.html' %} {% block title %} ConvAI - Learn {% endblock %}
+{%block content %}
+<div class="container mt-3">
+  <ul class="nav nav-tabs">
+    <li>
+      <h3>AI TUTOR</h3>
+      <h6>by vamsi</h6>
+    </li>
+    <li class="nav-item">
+      <a style="color: black" href="/" class="nav-link">Home</a>
+    </li>
+    <li class="">
+      <a href="/learn/A" class="nav-link active">Start Learning</a>
+    </li>
+    <li class="">
+      <a style="color: black" href="/about" class="nav-link">About</a>
+    </li>
+  </ul>
+</div>
+<div class="container p-1 my-4 progress">
+  <div
+    id="p_bar"
+    class="progress-bar bg-warning"
+    role="progressbar"
+    aria-valuenow="10"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  ></div>
+</div>
+<div class="grid-container">
+  <div style="max-height: 30%; max-width: 70%" id="selectSection">
+    <select
+      style="padding: 10%; scale: 120%; min-height: 100%"
+      class="form-select"
+      multiple
+      aria-label="multiple select example"
+      onchange="if (this.value) window.location.href=this.value;onSelection()"
+      id="mySelect"
+    >
+      <option
+        style="
+          margin-bottom: 20px;
+          background-color: aquamarine;
+          padding: 20px;
+          border-radius: 10px;
+        "
+        selected
+        value="AI Tutor : Select a section to begin with the tutorial."
+      >
+        Sections
+      </option>
+      <option value="/learn/A">Intro to ML training</option>
+      <option value="/learn/B">Steps in Training</option>
+      <option value="/learn/C">Data Collection</option>
+      <option value="/learn/D">Preprocessing</option>
+      <option value="/learn/E">Training</option>
+      <option value="/learn/F">Evaluation</option>
+    </select>
+  </div>
+  <div class="discussion">
+    <p id="prompt">Start Learning Now !! select a section to begin with</p>
+    <div>
+      <div class="chat-box" >
+        {% for message in messages|slice:":1" %}
+        <div class="msg">
+          <p class="msg">{{ message.content }}<br /></p>
+          <p style="color: rgb(0, 58, 139)">
+            &nbsp;&nbsp;&lt;{{ message.role }}&gt;&nbsp;&nbsp;
+            {{message.timestamp }}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+      <div id="question_id">
+        <select
+          style="
+            padding-top: 10px;
+            margin-bottom: 10px;
+            max-height: 80px;
+            margin-top: 20px;
+            overflow: hidden;
+          "
+          class="form-select"
+          multiple
+          aria-label="multiple select example"
+          onchange="onSelection();getQuestion()"
+          id="take_test_select"
+        >
+          <option
+            style="
+              background-color: aquamarine;
+              padding: 20px;
+              border-radius: 10px;
+            "
+            value="/learn/A"
+          >
+            Take test
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="discussion">
+    <form action="{% url 'clear' %}">
+      <h3>
+        Discussion Channel
+        <input
+          class="btn btn-danger"
+          type="submit"
+          value="Clear All"
+          id="message-clear"
+        />
+      </h3>
+    </form>
+    <div>
+      <div class="chat-box" id="chat-box-main">
+        {% for message in messages|slice:"1:2" %}
+        <div class="msg">
+          <p class="msg">{{ message.content }}<br /></p>
+          <p style="color: rgb(0, 58, 139)">
+            &nbsp;&nbsp;&lt;{{ message.role }}&gt;&nbsp;&nbsp;
+            {{message.timestamp }}
+          </p>
+        </div>
+        {% endfor %} {% for message in messages|slice:"3:" %}
+        <div class="msg">
+          <p class="msg">{{ message.content }}<br /></p>
+          <p style="color: rgb(0, 58, 139)">
+            &nbsp;&nbsp;&lt;{{ message.role }}&gt;&nbsp;&nbsp;
+            {{message.timestamp }}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+      <form method="POST" action="{% url 'send_message' %}">
+        {% csrf_token %}
+        <textarea
+          style="max-width: 100%"
+          name="content"
+          wrap="soft"
+          id="message-input"
+        >
+        </textarea>
+        <button
+          style="margin-bottom: 40px; margin-top: 10px"
+          class="btn btn-success"
+          type="submit"
+          id="send-button"
+        >
+          Send
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  function next_section() {
+    let base = window.location.href.split('/')[4].charCodeAt(0)+1;
+    if (base ==71){
+        alert("Congratulations on completing the course !!");
+        window.location.href = (window.location.href).slice(0, (((window.location.href).length)-8));
+    }else{
+    window.location.href = (window.location.href).slice(0, (((window.location.href).length)-2)) + String.fromCharCode(base)+"/";
+    }
+  }
+  function getQuestion() {
+    let que = prompt("Please enter your answer", "answer in 'yes' or 'no'");
+    var actual_sol;
+    if(1==
+        "{% for message in messages|slice:'2:3' %}{{ message.content }}{% endfor %}"){actual_sol="Yes"}else{actual_sol="No"}
+    if (que != null) {
+      document.getElementById("question_id").innerHTML =
+        "Your Answer was " +
+        que +
+        "<br> while the correct answer is : " +
+        actual_sol +
+        "<br><a href=''><button type='button' class='btn btn-primary'>Retry</button></a><button style='margin-left:20px;' type='button' onclick='next_section()' class='btn btn-success'>Next</button>";
+    }
+    var input_sol = 0;
+    if (que.toLowerCase() == "yes") {
+      input_sol = 1;
+    }
+    if (
+      input_sol ==
+      "{% for message in messages|slice:'2:3' %}{{ message.content }}{% endfor %}"
+    ) {
+      alert("Congratulations on clearing the section.");
+    } else {
+      alert(
+        "Oops, thats the wrong answer. Try redoing the section and take the help of the Discussion Channel. Keep learning."
+      );
+    }
+  }
+</script>
+{% endblock %}

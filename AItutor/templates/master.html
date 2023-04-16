@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{% block title %} {% endblock %}</title>
+    <style>
+      .chat-box {
+        width: auto;
+        height: 500px;
+        padding: 20px;
+        background-image: linear-gradient(
+          to right,
+          rgb(164, 225, 224),
+          rgb(236, 229, 217),
+          rgb(167, 221, 194)
+        );
+        opacity: 0.9;
+        border: 1px solid black;
+        border-radius: 15px;
+        overflow-y: scroll;
+
+        scroll-behavior: smooth;
+      }
+      #message-input {
+        width: auto;
+        height: 75px;
+        padding: 10px 10px 0 10px;
+        margin-top: 10px;
+        background-color: rgb(155, 222, 205);
+        border-radius: 5px;
+        overflow-y: hidden;
+        text-align: center;
+      }
+      #redirect {
+        text-align: center;
+      }
+      .msg {
+        background-color: rgb(251, 255, 255);
+        border-radius: 15px;
+        padding: 5px;
+        margin-bottom: 15px;
+        word-wrap: break-word;
+      }
+
+      #myimg {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: -10;
+        margin: 80px 0px 60px 0px;
+        min-width: 100%;
+        min-height: 110%;
+      }
+
+      #selectSection {
+        margin-left: 30px;
+        margin-top: 20px;
+        min-width: 80%;
+      }
+      .discussion {
+        background-color: aquamarine;
+        opacity: 0.9;
+        margin-right: 20px;
+        margin-bottom: 15px;
+        padding: 20px 20px 120px 20px;
+        border-radius: 10px;
+        max-height: 80%;
+      }
+      .grid-container {
+        display: grid;
+        grid-template-columns: 0.3fr 1fr 1fr;
+        grid-gap: 20px;
+      }
+    </style>
+  </head>
+
+  <body >
+      <div style="min-width: 100%">
+        <img
+          id="myimg"
+          src="https://appsero.com/app/uploads/2021/12/Mistakes-to-Avoid-When-Developing-WordPress-PluginsThemes.png"
+          alt=""
+          height="600"
+        />
+      </div>
+      {% block content %} {% endblock %}
+
+  </body>
+  <script>
+    var objDiv = document.getElementById("chat-box-main");
+    objDiv.scrollTop = objDiv.scrollHeight;
+    function onSelection() {
+      var x = window.location.href.slice(
+        window.location.href.length - 2,
+        window.location.href.length - 1
+      );
+      const attr = document.createAttribute("style");
+      var b = "A";
+      const sections = [
+        "Intro to ML training",
+        "Steps in Training",
+        "Data Collection",
+        "Preprocessing",
+        "Training",
+        "Evaluation",
+      ];
+      var width_val = ((x.charCodeAt(0) - b.charCodeAt(0) + 1) * 100) / 6;
+      attr.value = "width: " + width_val.toString() + "%";
+      document.getElementById("prompt").innerHTML =
+        sections[x.charCodeAt(0) - b.charCodeAt(0)];
+      const element = document.getElementById("p_bar");
+      element.setAttributeNode(attr);
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</html>

@@ -32,7 +32,7 @@ pandas-stubs==2.0.0.230412
 pathtools==0.1.2
 Pillow==9.5.0
 plotly==5.14.1
-protobuf==4.22.3
+protobuf==4.25.8
 psutil==5.9.4
 pycodestyle==2.10.0
 pyparsing==3.0.9
